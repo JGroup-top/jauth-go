@@ -1,4 +1,4 @@
-module jauth-go
+module github.com/JGroup-top/jauth-go
 
 go 1.27
 
