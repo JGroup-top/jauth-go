@@ -199,8 +199,8 @@ go build ./...
 ## Конфигурация и контракт
 
 - `BaseURL` по умолчанию: `https://sso.jgroup.top`; завершающие `/` удаляются.
-- Пути: `/oauth/authorize`, `/oauth/token`, `/userinfo`. Префикс пути в BaseURL сохраняется.
-- Эти пути взяты из исходного проекта; интеграция с действующим JAuth не проверялась.
+- Пути: `/oauth2/authorize`, `/oauth2/token`, `/userinfo`. Префикс пути в BaseURL сохраняется.
+- Endpoints сверены с публичной OIDC-конфигурацией https://sso.jgroup.top/.well-known/openid-configuration. Полный вход требует проверки с аккаунтом.
 - `ClientID` и абсолютный `RedirectURL` обязательны. `ClientSecret` может быть пустым для публичного клиента с PKCE.
 - Пустые `Scopes` дают `openid profile email`; непустой список заменяет их.
 - Можно передать `HTTPClient` для настройки транспорта и таймаута. Клиент копируется; HTTP-перенаправления отключены для запросов токенов и UserInfo.

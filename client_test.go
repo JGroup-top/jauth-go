@@ -23,7 +23,7 @@ func TestConfig(t *testing.T) {
 		t.Fatal(err)
 	}
 	u, _ := url.Parse(c.AuthorizationURL("random-state"))
-	if u.Scheme+"://"+u.Host != DefaultBaseURL || u.Path != "/oauth/authorize" || u.Query().Get("state") != "random-state" || u.Query().Get("scope") != "openid profile email" || u.Query().Get("response_type") != "code" {
+	if u.Scheme+"://"+u.Host != DefaultBaseURL || u.Path != "/oauth2/authorize" || u.Query().Get("state") != "random-state" || u.Query().Get("scope") != "openid profile email" || u.Query().Get("response_type") != "code" {
 		t.Fatal(u)
 	}
 	cfg.BaseURL = "http://localhost:3001/prefix///"
@@ -34,7 +34,7 @@ func TestConfig(t *testing.T) {
 	}
 	cfg.Scopes[0] = "changed"
 	u, _ = url.Parse(c.AuthorizationURL("state"))
-	if u.Path != "/prefix/oauth/authorize" || u.Query().Get("scope") != "profile" || c.userInfoURL != "http://localhost:3001/prefix/userinfo" {
+	if u.Path != "/prefix/oauth2/authorize" || u.Query().Get("scope") != "profile" || c.userInfoURL != "http://localhost:3001/prefix/userinfo" {
 		t.Fatal(u, c.userInfoURL)
 	}
 	for _, base := range []string{"relative", "ftp://host", "https://host?x=1", "https://host#fragment", "https://user:pass@host"} {
@@ -66,7 +66,7 @@ func TestAuthenticatePKCEAndRefresh(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 		switch r.URL.Path {
-		case "/oauth/token":
+		case "/oauth2/token":
 			tokenCalls++
 			if r.Method != "POST" {
 				t.Error(r.Method)

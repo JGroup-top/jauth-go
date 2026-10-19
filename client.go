@@ -54,7 +54,7 @@ func New(config Config) (*Client, error) {
 		oauthConfig: &oauth2.Config{
 			ClientID: config.ClientID, ClientSecret: config.ClientSecret,
 			RedirectURL: config.RedirectURL, Scopes: scopes,
-			Endpoint: oauth2.Endpoint{AuthURL: config.BaseURL + "/oauth/authorize", TokenURL: config.BaseURL + "/oauth/token"},
+			Endpoint: oauth2.Endpoint{AuthURL: config.BaseURL + "/oauth2/authorize", TokenURL: config.BaseURL + "/oauth2/token"},
 		},
 	}, nil
 }
